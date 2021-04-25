@@ -8,12 +8,14 @@
 
 在使用过程中, 应该作为一个正常业务标识; 应由Data provider自行处理该错误:
 
-1. 如果sql查询出来有数据,那么在发生 `sql.ErrNoRows` 时, 应返回具体的数据(data, nil)
+1. 如果sql查询出来有数据, 没有发生错误, 应返回具体的数据(data, nil)
 
-2. 如果sql查询出来没有数据, 那么在发生 `sqk.ErrNoRows` 时, 应该可以返回一个(nil, nil)
+2. 如果sql查询出来没有数据, 那么在发生 `sql.ErrNoRows` 时, 应该可以返回一个(nil, nil)
+
+3. 如果sql查询数据时, 发生非 `sql.ErrNoEows` 错误时, 应该返回一个(nil , err)
 
 当然在业务中我们也可以直接进行 `sql.ErrNoRows`进行无数据判断, 而且还可以不用进行空数据判断;
-但是这会导致我们的各个包均可能依赖datasouce/sql包,
+但是这会导致我们的各个包均可能依赖`datasouce/sql`包,
 在复杂业务场景下, 一个包突然依赖一个看起来不相关的库, 我认为这是不合适的.
 
 # code

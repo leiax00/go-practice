@@ -8,9 +8,9 @@
 
 在使用过程中, 应该作为一个正常业务标识; 应由Data provider自行处理该错误:
 
-1. 如果sql查询出来有 N 条数据,那么在发生 `sql.ErrNoRows` 时, 应返回这 N 条数据的切片(或对应的BO)
+1. 如果sql查询出来有数据,那么在发生 `sql.ErrNoRows` 时, 应返回具体的数据(data, nil)
 
-2. 如果sql查询出来没有数据, 那么在发生 `sqk.ErrNoRows` 时, 应该返回一个空切片(或对应的BO)
+2. 如果sql查询出来没有数据, 那么在发生 `sqk.ErrNoRows` 时, 应该可以返回一个(nil, nil)
 
 # code
 ```shell

@@ -6,6 +6,7 @@ items:
     kind: Namespace
     metadata:
       name: basic-component
+
   - apiVersion: v1
     kind: PersistentVolume
     metadata:
@@ -17,7 +18,7 @@ items:
       capacity:
         storage: 1Gi
       accessModes:
-        - ReadWriteMany
+        - ReadWriteOnce
       nfs:
         # FIXME: use the right IP
         server: 192.168.10.10

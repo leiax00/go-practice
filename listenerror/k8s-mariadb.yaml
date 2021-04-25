@@ -1,0 +1,84 @@
+# mysql + redis + kafka + elasticsearch
+apiVersion: v1
+kind: List
+items:
+  - apiVersion: v1
+    kind: Namespace
+    metadata:
+      name: BASIC_COMPONENT
+  - apiVersion: v1
+    kind: PersistentVolume
+    metadata:
+      name: mariadb-pv
+      namespace: BASIC_COMPONENT
+      labels:
+        pv: mariadb-pv
+    spec:
+      capacity:
+        storage: 1Gi
+      accessModes:
+        - ReadWriteMany
+      nfs:
+        # FIXME: use the right IP
+        server: 192.168.10.10
+        path: "/data/k8s/mariadb_data"
+
+  - apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      name: mariadb-pvc
+      namespace: BASIC_COMPONENT
+    spec:
+      selector:
+        matchLabels:
+          pv: mariadb-pv
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 1Gi
+
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      name: base-mariadb
+      namespace: BASIC_COMPONENT
+    spec:
+      ports:
+        - nodePort: 3306
+          port: 3306
+          protocol: TCP
+          targetPort: 3306
+      selector:
+        app: base-mariadb
+      type: NodePort
+
+  - apiVersion: apps/v1
+    kind: StatefulSet
+    metadata:
+      name: base-mariadb
+      namespace: BASIC_COMPONENT
+    spec:
+      serviceName: base-mariadb
+      selector:
+        matchLabels:
+          app: base-mariadb
+      replicas: 1
+      template:
+        metadata:
+          labels:
+            app: base-mariadb
+        spec:
+          containers:
+            - name: mariadb
+              image: mariadb:latest
+              ports:
+                - containerPort: 3306
+                  protocol: TCP
+              volumeMounts:
+                - mountPath: "/var/lib/mysql"
+                  name: mariadb-volume
+          volumes:
+            - name: mariadb-volume
+              persistentVolumeClaim:
+                claimName: mariadb-pvc

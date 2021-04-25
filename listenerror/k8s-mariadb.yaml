@@ -5,12 +5,12 @@ items:
   - apiVersion: v1
     kind: Namespace
     metadata:
-      name: BASIC_COMPONENT
+      name: basic-component
   - apiVersion: v1
     kind: PersistentVolume
     metadata:
       name: mariadb-pv
-      namespace: BASIC_COMPONENT
+      namespace: basic-component
       labels:
         pv: mariadb-pv
     spec:
@@ -27,7 +27,7 @@ items:
     kind: PersistentVolumeClaim
     metadata:
       name: mariadb-pvc
-      namespace: BASIC_COMPONENT
+      namespace: basic-component
     spec:
       selector:
         matchLabels:
@@ -42,7 +42,7 @@ items:
     kind: Service
     metadata:
       name: base-mariadb
-      namespace: BASIC_COMPONENT
+      namespace: basic-component
     spec:
       ports:
         - nodePort: 3306
@@ -57,7 +57,7 @@ items:
     kind: StatefulSet
     metadata:
       name: base-mariadb
-      namespace: BASIC_COMPONENT
+      namespace: basic-component
     spec:
       serviceName: base-mariadb
       selector:

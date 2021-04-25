@@ -71,7 +71,7 @@ items:
         spec:
           containers:
             - name: mariadb
-              image: mariadb:latest
+              image: mariadb-with-root:v1.0
               ports:
                 - containerPort: 3306
                   protocol: TCP

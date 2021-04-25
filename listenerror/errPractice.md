@@ -18,6 +18,7 @@
 
 # code
 ```shell
+`main.go`                                    : 入口
 `listenerror/task/dboperation.go`            : db操作
 `listenerror/task/busnessservice.go`         : 业务处理
 `listenerror/task/viewresource.go`           : 对外接口

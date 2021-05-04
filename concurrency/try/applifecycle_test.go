@@ -3,6 +3,7 @@ package try
 import (
 	"context"
 	"fmt"
+	"testing"
 	"time"
 )
 
@@ -46,7 +47,7 @@ func (t *Tracker) Shutdown(ctx context.Context) {
 	}
 }
 
-func AppCycleDemo() {
+func TestAppCycleDemo(t *testing.T) {
 	tracker := NewTracker()
 	go tracker.Run()
 	_ = tracker.Commit(context.Background(), "tracker_01")

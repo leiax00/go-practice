@@ -30,7 +30,7 @@ func provideBar(f Fooer) string {
 	return f.Foo()
 }
 
-// 函数调用链
+// WireSet 函数调用链
 var WireSet = wire.NewSet(
 	provideMyFooer,
 	wire.Bind(new(Fooer), new(*MyFooer)),

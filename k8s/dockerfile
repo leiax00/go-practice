@@ -1,4 +1,0 @@
-# mariadb-with-root:v1.0
-FROM mariadb:latest
-ENV MYSQL_ROOT_PASSWORD root
-ENV LANG zh_CN.UTF-8

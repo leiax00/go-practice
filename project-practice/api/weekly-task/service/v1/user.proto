@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package weekly_task.service.v1;
+
+//import "google/api/annotations.proto";
+
+option go_package = "api/weekly-task/service/v1;v1";
+
+service User {
+  rpc GetUserInfo (UserIdReq) returns (UserReply) {}
+  rpc GetUsers (UserAgeReq) returns (UserListReply) {}
+}
+
+message UserIdReq {
+  int64 id = 1;
+}
+
+message UserAgeReq {
+  int32 age = 1;
+}
+
+message UserReply {
+  int64 id = 1;
+  string name = 2;
+  string password = 3;
+  int32 age = 4;
+  string desc = 5;
+}
+
+message UserListReply {
+  repeated UserReply userReply = 1;
+}

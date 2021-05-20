@@ -1,0 +1,17 @@
+server:
+  app:
+    serverName: project-practice
+    version: v1.0.0
+    contextPath: /
+  http:
+    addr: 0.0.0.0:8000
+    timeout: 10s
+  grpc:
+    addr: 0.0.0.0:9000
+    timeout: 10s
+
+data:
+  database:
+    driver: mysql
+    source: root:root@tcp(192.168.10.10:3306)/go-practice?charset=utf8
+

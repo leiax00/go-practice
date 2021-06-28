@@ -86,7 +86,7 @@ func getRedisKv(b *testing.B, key string) {
 func getClient() *redis.Client {
 	if rdb == nil {
 		rdb = redis.NewClient(&redis.Options{
-			Addr:     "localhost:6379",
+			Addr:     "lax-01:16379",
 			Password: "",
 			DB:       0,
 		})
@@ -104,4 +104,5 @@ func TestCalcAvgMemory(t *testing.T) {
 			cnt.Set(ctx, fmt.Sprintf("key_%d", i), getRandomString(item), 0)
 		}
 	}
+	cnt.FlushDB(ctx)
 }

@@ -3,7 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
-	week_9 "leiax00.cn/week9"
+	week9 "leiax00.cn/week9"
 	"net"
 	"os"
 )
@@ -31,7 +31,7 @@ func readResp(conn net.Conn) {
 	//fmt.Println(err)
 	//fmt.Println(string(bytes))
 	rr := bufio.NewReader(conn)
-	decode := week_9.GoImD.WithStream(rr).Decode()
+	decode := week9.GoImD.WithStream(rr).Decode()
 	result, err := decode.Result()
 	if err != nil {
 		fmt.Printf("err happen: %v", err)

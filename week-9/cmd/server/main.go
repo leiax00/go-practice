@@ -5,6 +5,7 @@ import (
 	"github.com/Terry-Mao/goim/api/protocol"
 	"github.com/Terry-Mao/goim/pkg/bytes"
 	"net"
+	"strings"
 	"time"
 )
 
@@ -32,15 +33,15 @@ func main() {
 
 func logic(conn net.Conn) {
 	for {
-		tmp := make([]byte, 1)
+		tmp := make([]byte, 3)
 		_, _ = conn.Read(tmp) // 演示, 忽略异常
 		fmt.Println(string(tmp))
-		cmd := string(tmp)
+		cmd := strings.TrimSpace(string(tmp))
 		var writer *bytes.Writer
 		switch cmd {
-		case "0":
-			writer = reply(1, 0, 1, "hand shake....")
 		case "1":
+			writer = reply(1, 0, 1, "hand shake....")
+		case "2":
 			writer = reply(1, 1, 2, "hand shake reply")
 		default:
 			writer = reply(1, 4, 4, "send message")
